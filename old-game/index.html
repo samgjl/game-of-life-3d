@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="game_of_life.js"></script>
+  <title>Lev and Sam's Game of Life</title>
+  <style>
+	/* Define the box styling */
+	.box {
+	  width: 20px;
+	  height: 20px;
+	  display: inline-block;
+	  border: 0px solid black;
+	  margin-right: 5px;
+	}
+
+	/* Define the red box styling */
+	.box.red {
+	  background-color: rgb(199, 81, 77);
+	}
+	.box.orange {
+	  background-color: rgb(255, 152, 0);
+	}
+	.box.yellow {
+	  background-color: rgb(255, 235, 59);
+	}
+	.box.green {
+	  background-color: rgb(66, 165, 66);
+	}
+	.box.blue {
+	  background-color: rgb(68, 118, 168);
+	}
+	.box.purple {
+	  background-color: rgb(156, 39, 176);
+	}
+	.box.white {
+		background-color: rgb(255, 255, 255)
+	}
+	input[type=number] {
+		border: none;
+		outline: none;
+		width: 24pt;
+	}
+  </style>
+</head>
+<body>
+  <h1>Game of Life</h1>
+  <p>By Lev and Sam, originally designed by John Conway</p>
+  
+  <input type="range" min="10" max="1000" step="10" value="160" oninput="setRefreshRate(this.value)">
+  <br>
+  <label>
+	Number of Rows:
+	<input id="row-input" type="number" min="1"  step="1" value="50" oninput="setRows(this.value)">
+  </label>
+  <br>
+  <label>
+	Number of Columns:
+	<input id="column-input" type="number" min="1" step="1" value="50" oninput="setColumns(this.value)">
+  </label>
+  <br>
+  <label>
+	Density:
+	<input id="density-input" type="number" min="0" max="100" step="1" value="50" oninput="setDensity(this.value)">
+	<span>%</span>
+  </label>
+  <br>
+  <button id="play-pause" onclick="pauseGame()">Play/Pause</button>
+  <button onclick="resetGrid()">Reset</button>
+
+  <div id="grid"></div>
+
+  <script>
+	// call a class for the game of life grid with a setup function and a randomize function
+	let density;
+	let refreshRate = 160;
+	let stop = -1;
+	let drawn = 1;
+	var x = 50;
+	var y = 30;
+	const gol = new GameOfLifeGrid(x, y);
+
+	function resetGrid() {
+		var grid = document.getElementById('grid');
+		while (grid.firstChild) grid.removeChild(grid.firstChild);
+
+		stop = -1;
+		document.getElementById("row-input").disabled = false;
+		document.getElementById("column-input").disabled = false;
+		document.getElementById("density-input").disabled = false;
+		// location.reload();
+	}
+	
+	function setColumns(value){
+		x = value;
+	}
+	
+	function setRows(value){
+		y = value;
+	}
+
+	function setRefreshRate(value) {
+		refreshRate = value;
+	}
+	
+	function setDensity(value) {
+		density = value;
+	}
+
+
+	// call the update function every refreshRate milliseconds until stop is true
+	function gameLoop() {
+		if (!stop && stop != -1) {
+			gol.update();
+			setTimeout(gameLoop, 1000-refreshRate);
+		}
+	}
+
+	function pauseGame() {
+		if (stop == -1) {
+			let x = parseInt(document.getElementById("row-input").value);
+			let y = parseInt(document.getElementById("column-input").value);
+			gol.makeArray(x, y);
+			// Initial frame:
+			gol.randomizeArray(density);
+			gol.draw();
+			// Disable inputss:
+			document.getElementById("row-input").disabled = true;
+			document.getElementById("column-input").disabled = true;
+			document.getElementById("density-input").disabled = true;
+			// Normal game loop
+			setTimeout(gameLoop, 1000-refreshRate);
+			stop = !stop;
+		}
+		else {
+			stop = !stop;
+			if (!stop) gameloop();
+		}
+	}
+</script>
+</body>
+</html>
