@@ -76,7 +76,7 @@
 		<script type="module">
 			import * as THREE from 'three';
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-			import GUI from 'lil-gui';
+			import * as LIL from 'lil-gui';
 
 			// make a enum that is either alive or dead
 			const ALIVE = 1;
@@ -447,11 +447,10 @@
 			##########################
 			*/
 
-
 			var dimension =  20;
 			var randParams = { density: 3 }
 			var speed = { speed: 30 }
-			const gui = new GUI();
+			const gui = new LIL.GUI();
 			const randomFolder = gui.addFolder("Parameters For Entropy");
 			const aestheticFolder = gui.addFolder("Aesthetic Parameters");
 			// Buttons:
