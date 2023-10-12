@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="utf-8">
+		<title>Samgjl | Conway's 3D Game of Life</title>
+		<style>
+			body { margin: 0; }
+			#title {
+				position: absolute;
+				top: 1%;
+				width: 100%;
+				font-family: Monospace;
+				font-size: 15px;
+				text-align: center;
+				color: #fff;
+				background-color: #0000;
+				z-index: 1;
+			}
+			#controls {
+				position: absolute;
+				top: 18%;
+				height: 10%;
+				right: 0.75%;
+				padding: 0px;
+				font-family: Monospace;
+				font-size: 15px;
+				text-align: right;
+				color: #fff;
+				background-color: #00000087;
+				z-index: 1;
+			}
+			a:link {
+				color: deepskyblue;
+				background-color: transparent;
+				text-decoration: none;
+			}
+			a:visited {
+				color: deepskyblue;
+				background-color: transparent;
+				text-decoration: none;
+			}
+		</style>
+		<script type="importmap">
+            {
+              "imports": {
+                "three": "https://unpkg.com/three@latest/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@latest/examples/jsm/",
+				"lil-gui": "https://unpkg.com/lil-gui@latest"
+              }
+            }
+          </script>
+        
+	</head>
+	<body>
+		<div id="title">
+			<font color="#AAAAAA">Algorithm based off of John Conway's Game of Life in 2D, <a target="_blank" href="https://levshuster.github.io/game-of-life/">as implemented by Lev Shuster and Sam Johnson-Lacoss</a><br>
+			3D algorithm and implementation by Sam Johnson-Lacoss using <a target="_blank" href="https://threejs.org/">THREE.js</a></font>
+			<h2><font color=#CCCCCC>The Game of Life</font></h2>
+			</div>
+		<div id="controls">
+			<font color="#CCCCCC">Density Map </font><br>
+			<font color="#AAAAAA">Brighter red : more neighbors</font><br>
+			<font color="#AAAAAA">Darker blue  : fewer neighbors</font><br>
+			<font color="#AAAAAA">Gray 		   : overpopulation</font><br>
+
+			<br>
+			<font color="#CCCCCC">Movement (Mouse) </font><br>
+			<font color="#AAAAAA">Right Mouse to rotate</font><br>
+			<font color="#AAAAAA">Left Mouse to move</font><br>
+			<br>
+			<font color="#CCCCCC">Building (Mouse) </font><br>
+			<font color="#AAAAAA">Left Click to place</font><br>
+			<font color="#AAAAAA">Right Click to break</font><br>
+			</div>
+
+		<script type="module" src="main.js" ></script>
+	</body>
+</html>
