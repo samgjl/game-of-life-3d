@@ -123,6 +123,9 @@ document.addEventListener("keypress", (e) => {
     } else if (e.key == "c") {
         gol.updating = false;
         gol.reset();
+    } else if (e.key == "d") {
+        gol.densityBased = !gol.densityBased;
+        gol.recolor();
     }
 });
 // Mouse clicks: L-Click=place, R-Click=remove
