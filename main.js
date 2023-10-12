@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import GUI from 'lil-gui';
-import GameOfLife3D from 'https://github.com/samgjl/game-of-life-3d/blob/main/game-of-life.js';
+import GameOfLife3D from '../game-of-life-3d.js';
+
 // Scene:
 const scene = new THREE.Scene();
 
@@ -40,8 +41,7 @@ const aestheticFolder = gui.addFolder("Aesthetic Parameters");
 // Buttons:
 var playpause = { add: function() { 
     gol.updating = !gol.updating; 
-    if (gol.updating) gol.casting = false;
-    else gol.casting = true;
+    gol.casting = !gol.updating;
 }};
 var randomize = { add: function() { 
     gol.casting = false;
@@ -114,8 +114,7 @@ document.addEventListener("keypress", (e) => {
     if (e.key == " ") {
         gol.updating = !gol.updating;
         // update casting:
-        if (gol.updating) gol.casting = false;
-        else gol.casting = true;
+        gol.casting = !gol.casting;
     } else if (e.key == "r") {	
         gol.updating = false;
         gol.redoAll(randParams['density']);
