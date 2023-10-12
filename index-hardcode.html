@@ -42,11 +42,11 @@
 		</style>
 		<script type="importmap">
             {
-              "imports": {
-                "three": "../node_modules/three/build/three.module.js",
-                "three/addons/": "../node_modules/three/examples/jsm/",
-				"lil-gui": "../node_modules/lil-gui/dist/lil-gui.esm.js"
-              }
+				"imports": {
+					"three": "https://unpkg.com/three@latest/build/three.module.js",
+					"three/addons/": "https://unpkg.com/three@latest/examples/jsm/",
+					"lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.18/+esm"				
+				}
             }
           </script>
         
@@ -447,7 +447,7 @@
 			##########################
 			*/
 
-			var dimension =  20;
+			var dimension =  30;
 			var randParams = { density: 3 }
 			var speed = { speed: 30 }
 			const gui = new GUI();

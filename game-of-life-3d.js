@@ -1,8 +1,5 @@
-import * as THREE from 'three';
-// make a enum that is either alive or dead
-const ALIVE = 1;
-const DEAD = 0;
-// make a class for the game of life grid with a setup function
+import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
+
 class GameOfLife3D {
 	constructor(d = 25, starve = 3, live =5, survive = 6) {
         /*
@@ -20,6 +17,9 @@ class GameOfLife3D {
         this.casting = true;
         this.updating = false;
         this.densityBased = false;
+        // Alive / Dead:
+        this.ALIVE = 1;
+        this.DEAD = 0;
 	}
 
     /*
@@ -61,7 +61,7 @@ class GameOfLife3D {
     * @sideeffect - Sets this.grid and this.needsUpdate
     */
 	randomizeArray(density_out_of_100 = 5) {
-        // Randomize the grid's ALIVE/DEAD values
+        // Randomize the grid's this.ALIVE/this.DEAD values
 		for (var i = 0; i < this.dimension; i++) {
 			for (var j = 0; j < this.dimension; j++) {
                 for (var k = 0; k < this.dimension; k++) {
@@ -297,19 +297,19 @@ class GameOfLife3D {
 	updateCell(cell, numNeighbors){
 		let i = cell[0]; let j = cell[1]; let k = cell[2];
         
-        if (numNeighbors <= this.starve) { // in the original, <1 = DEAD
-            this.swapLife(i, j, k, DEAD);
+        if (numNeighbors <= this.starve) { // in the original, <1 = this.DEAD
+            this.swapLife(i, j, k, this.DEAD);
         }
-        else if (numNeighbors > this.starve && numNeighbors <= this.live) { // in the original, 3 = ALIVE
-            let update = ((this.grid[i][j][k] && !ALIVE) || (!this.grid[i][j][k] && ALIVE))
-            this.swapLife(i, j, k, ALIVE, update)
+        else if (numNeighbors > this.starve && numNeighbors <= this.live) { // in the original, 3 = this.ALIVE
+            let update = ((this.grid[i][j][k] && !this.ALIVE) || (!this.grid[i][j][k] && this.ALIVE))
+            this.swapLife(i, j, k, this.ALIVE, update)
         }
         else if (numNeighbors > this.live && numNeighbors <= this.survive) { // in the original, 2 = remains the same
             let update = ((this.grid[i][j][k] && !1) || (!this.grid[i][j][k] && 1))
             this.swapLife(i, j, k, this.grid[i][j][k], update)
         }
         else { // Too many neighbors, suffocate
-            this.swapLife(i, j, k, DEAD);
+            this.swapLife(i, j, k, this.DEAD);
         }
 	}
     /*
