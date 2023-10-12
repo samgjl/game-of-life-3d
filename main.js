@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import GUI from 'lil-gui';
-import GameOfLife3D from '/game-of-life-3d/game-of-life-3d.js';
+import GameOfLife3D from 'https://github.com/samgjl/game-of-life-3d/blob/main/game-of-life.js';
 // Scene:
 const scene = new THREE.Scene();
 
