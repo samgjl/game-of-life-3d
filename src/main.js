@@ -2,7 +2,6 @@ import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.18/+esm';
 import GameOfLife3D from '/src/game-of-life-3d.js';
-
 // Scene:
 const scene = new THREE.Scene();
 
@@ -27,13 +26,12 @@ controls.update();
 
 /*
 ##########################
-       GUI + PARAMS
+    GUI + PARAMS
 ##########################
 */
 
-
-var dimension =  20;
-var randParams = { density: 3 }
+var dimension =  30;
+var randParams = { density: 25 }
 var speed = { speed: 30 }
 const gui = new GUI();
 const randomFolder = gui.addFolder("Parameters For Entropy");
@@ -41,7 +39,11 @@ const aestheticFolder = gui.addFolder("Aesthetic Parameters");
 // Buttons:
 var playpause = { add: function() { 
     gol.updating = !gol.updating; 
-    gol.casting = !gol.updating;
+    if (gol.updating) gol.casting = false;
+    else {
+        gol.casting = true;
+        gol.matchVisuals();
+    }
 }};
 var randomize = { add: function() { 
     gol.casting = false;
@@ -55,7 +57,7 @@ var reset = { add: function() {
 }};
 var densityBased = { add: function() { 
     gol.densityBased = !gol.densityBased;
-    gol.recolor();
+    gol.recolor(true);
 }};
 randomFolder.add(randParams, "density", 0, 100, 1);
 randomFolder.add(randomize, "add").name("Randomize (R)");
@@ -66,7 +68,7 @@ gui.add(playpause, "add").name("Play/Pause (Space)");
 
 /*
 ##########################
-           MAIN
+        MAIN
 ##########################
 */
 
@@ -112,18 +114,13 @@ document.addEventListener('mousemove', onPointerMove);
 // Keypresses for shortcuts:
 document.addEventListener("keypress", (e) => {
     if (e.key == " ") {
-        gol.updating = !gol.updating;
-        // update casting:
-        gol.casting = !gol.casting;
+        playpause.add();
     } else if (e.key == "r") {	
-        gol.updating = false;
-        gol.redoAll(randParams['density']);
+        randomize.add();
     } else if (e.key == "c") {
-        gol.updating = false;
-        gol.reset();
+        reset.add();
     } else if (e.key == "d") {
-        gol.densityBased = !gol.densityBased;
-        gol.recolor();
+        densityBased.add();
     }
 });
 // Mouse clicks: L-Click=place, R-Click=remove
@@ -194,12 +191,13 @@ function raycastToVoxel(contact, intersectPoint, getNextTo = false) {
     // Otherwise, we want the block we're pointing at:
     else {
         raycastPoint = new THREE.Vector3((contact.position.x)*gol.dimension, 
-                                         (contact.position.y)*gol.dimension, 
-                                         (contact.position.z)*gol.dimension);
+                                        (contact.position.y)*gol.dimension, 
+                                        (contact.position.z)*gol.dimension);
     } 
     // Return the point:
     return raycastPoint;
 }
+
 /*
 * Light up the point we're pointing at
 * @return {void}
