@@ -148,6 +148,15 @@ class GameOfLife3D {
         this.recolor(true);
     }
 
+    /*
+    * Recolor the points
+    * @param {boolean} checkAll - Whether or not to check all points
+    * @return {void}
+    * @sideeffect - Sets this.pointsArray[i][j][k].material.color
+    * @sideeffect - Sets this.pointsArray[i][j][k].material.opacity
+    * @sideeffect - Sets this.pointsArray[i][j][k].material.visible
+    * @sideeffect - Sets this.pointsArray[i][j][k].clickable
+    */
     recolor(checkAll = false) {
         // If we aren't density based, make the points a rainbow:
         let neighbors;
@@ -225,7 +234,12 @@ class GameOfLife3D {
         this.recolor(true);
         this.updateAndDraw(false);
     }
-
+    /*
+    * Match the visuals to the grid
+    * @param {void}
+    * @return {void}
+    * @sideeffect - Sets this.grid and this.needsUpdate
+    */
     matchVisuals() {
         for (var i = 0; i < this.dimension; i++) {
             for (var j = 0; j < this.dimension; j++) {

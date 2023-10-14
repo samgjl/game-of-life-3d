@@ -1,7 +1,7 @@
 import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.18/+esm';
-import GameOfLife3D from '/src/game-of-life-3d.js';
+import GameOfLife3D from '/src/gol-3d.js';
 // Scene:
 const scene = new THREE.Scene();
 
@@ -19,10 +19,6 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 // Controls:
 const controls = new OrbitControls(camera, renderer.domElement);
-
-// Set camera:
-camera.position.set(1.125, 1.125, 1.125);
-controls.update();
 
 /*
 ##########################
@@ -85,6 +81,9 @@ var lastIntersect; // old intersected block
 var oldColor; // old color of the old intersected block
 // Make the points from scratch:
 gol.makePoints(parent);
+// Set camera's position:
+camera.position.set(1.125, 1.125, 1.125);
+controls.update();
 // Render loop:
 
 // ####### USE THIS FOR WEBXR: #######
