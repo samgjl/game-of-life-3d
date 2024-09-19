@@ -2,9 +2,11 @@ import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
 import { OrbitControls } from 'https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js';
 import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
 import GameOfLife3D from '/src/gol-3d.js';
+// URL:
+const url = new URL(window.location.href);
+
 // Scene:
 const scene = new THREE.Scene();
-
 // Camera:
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
@@ -19,13 +21,17 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 // Controls:
 const controls = new OrbitControls(camera, renderer.domElement);
+// check if we should disable zoom
+let params = url.searchParams;
+if (params.has("disable_scroll")) {
+    controls.enableZoom = false;
+}
 
 /*
 ##########################
     GUI + PARAMS
 ##########################
 */
-
 var dimension =  30;
 var randParams = { density: 25 }
 var speed = { speed: 30 }
@@ -61,6 +67,11 @@ aestheticFolder.add(speed, "speed", 0, 59, 1).name("Speed");
 aestheticFolder.add(densityBased, "add").name("Color based on Density? (D)");
 gui.add(reset, "add").name("Clear (C)");
 gui.add(playpause, "add").name("Play/Pause (Space)");
+
+// Starts the GUI collapsed:
+if (params.has("hide_gui")) {
+    gui.close();
+}
 
 /*
 ##########################
