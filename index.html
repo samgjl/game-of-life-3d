@@ -55,7 +55,7 @@
 			<font color="#AAAAAA">Algorithm based off of John Conway's Game of Life in 2D, <a target="_blank" href="https://levshuster.github.io/game-of-life/">as implemented by Lev Shuster and Sam Johnson-Lacoss</a><br>
 			3D algorithm and implementation by Sam Johnson-Lacoss using <a target="_blank" href="https://threejs.org/">THREE.js</a></font>
 			<h2><font color=#CCCCCC>The Game of Life</font></h2>
-			</div>
+		</div>
 		<div id="controls">
 			<font color="#DDDDDD">Density Map </font><br>
 			<font color="#AAAAAA">Old Survival |</font>&nbsp;<font color="sky blue">Blue</font><br>
@@ -83,6 +83,7 @@
 			let searchParams = new URLSearchParams(url.search);
 			if (searchParams.has("hide_gui")) {
 				document.getElementById("controls").style.display = "none";
+				document.getElementById("title").style.display = "none";
 			}
 		</script>
 	</body>
