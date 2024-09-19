@@ -73,7 +73,11 @@ gui.add(playpause, "add").name("Play/Pause (Space)");
 */
 
 // Game of Life + Parent Object:
-const gol = new GameOfLife3D(dimension);
+let rules = [5, 7, 6, 6];
+if (params.has("rules")) {
+    rules = params.get("rules").split("").map(x => parseInt(x));
+}
+const gol = new GameOfLife3D(dimension, rules);
 gol.randomizeArray(randParams['density']);
 const parent = new THREE.Object3D();
 scene.add(parent);

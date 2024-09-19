@@ -6,7 +6,7 @@ const ALIVE = 1;
 const DEAD = 0;
 // make a class for the game of life grid with a setup function
 class GameOfLife3D {
-    constructor(d = 25, survive_l = 5, survive_u = 7, fertile_l = 6, fertile_u = 6) {
+    constructor(d = 25, rules = [5, 7, 6, 6]) {
         /*
         * working parameters:
         * * d = 25, starve = 3, live = 4, survive = 6 (default)
@@ -15,10 +15,10 @@ class GameOfLife3D {
         this.dimension = d;
         this.makeArray(this.dimension);
         // The number of neighbors needed to starve/come alive/suffocate
-        this.survive_l = survive_l; // survive lower bound
-        this.survive_u = survive_u; // survive upper bound
-        this.fertile_l = fertile_l; // fertile lower bound
-        this.fertile_u = fertile_u; // fertile upper bound
+        this.survive_l = rules[0]; // survive lower bound
+        this.survive_u = rules[1]; // survive upper bound
+        this.fertile_l = rules[2]; // fertile lower bound
+        this.fertile_u = rules[3]; // fertile upper bound
 
         // Raycasting elements and such:
         this.casting = true;
