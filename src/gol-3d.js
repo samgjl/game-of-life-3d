@@ -276,21 +276,6 @@ class GameOfLife3D {
             }
         }
         return neighbors;
-        
-        for (var i = -1; i < 2; i++) {
-            if (x+i < 0 || x+i >= this.dimension) continue; // cull early if out of bounds
-            for (var j = -1; j < 2; j++) {
-                if (y+j < 0 || y+j >= this.dimension) continue; // cull early if out of bounds
-                for (var k = -1; k < 2; k++) {
-                    if (z+k < 0 || z+k >= this.dimension) continue; // cull if out of bounds
-                    // if the neighbor is alive and not the cell itself
-                    if (grid[x+i][y+j][z+k] == 1 && !(i == 0 && j == 0 && k == 0)) {
-                        neighbors++;
-                    }
-                }
-            }
-        }
-        return neighbors;
     }
 
     /*
