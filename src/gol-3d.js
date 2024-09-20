@@ -263,6 +263,20 @@ class GameOfLife3D {
     countNeighbors(x, y, z, grid = this.grid) {
         var neighbors = 0;
         // check the 8 neighbors using two for loops
+        for (let i = -1; i <=1; i++) {
+            let a = (x+i < 0) ? this.dimension-1 : (x+i) % this.dimension;
+            for (let j = -1; j <=1; j++) {
+                let b = (y+j < 0) ? this.dimension-1 : (y+j) % this.dimension;
+                for (let k = -1; k <=1; k++) {
+                    let c = (z+k < 0) ? this.dimension-1 : (z+k) % this.dimension;
+                    if (grid[a][b][c] == 1 && !(i == 0 && j == 0 && k == 0)) {
+                        neighbors++;
+                    }
+                }
+            }
+        }
+        return neighbors;
+        
         for (var i = -1; i < 2; i++) {
             if (x+i < 0 || x+i >= this.dimension) continue; // cull early if out of bounds
             for (var j = -1; j < 2; j++) {
