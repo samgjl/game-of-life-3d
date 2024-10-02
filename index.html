@@ -40,15 +40,18 @@
 				text-decoration: none;
 			}
 		</style>
+		<!-- import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
+		import { OrbitControls } from 'https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js';
+		import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm'; -->
 		<script type="importmap">
-            {
+			{
 				"imports": {
 					"three": "https://unpkg.com/three@latest/build/three.module.js",
-					"three/addons/": "https://unpkg.com/three@latest/examples/jsm/"
+					"three/examples/jsm/controls/OrbitControls": "https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js",
+					"lil-gui": "https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm"
 				}
 			}
-          </script>
-        
+		</script>
 	</head>
 	<body style="overflow: hidden;">
 		<div id="title">
@@ -76,7 +79,7 @@
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 			<a href="https://github.com/samgjl/game-of-life-3d" target="_blank"><font color="#DDDDDD">Github repository here</font> <i class="fa fa-external-link" aria-hidden="true" style="font-size: smaller;"></i></a>
 		</div>
-		<script type="module" src="/src/main.js"></script>
+		<script type="module" src="src/main.js"></script>
 
 		<script>
 			let url = new URL(window.location.href);

@@ -1,5 +1,5 @@
-import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
-import textureSource from '/public/texture.png';
+import * as THREE from 'three';
+const textureSource = '/src/texture.png';
 
 // make a enum that is either alive or dead
 const ALIVE = 1;
