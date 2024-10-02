@@ -1,7 +1,7 @@
-import * as THREE from 'https://unpkg.com/three@latest/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js';
-import GUI from 'https://cdn.jsdelivr.net/npm/lil-gui@0.19/+esm';
-import GameOfLife3D from '/src/gol-3d.js';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import GUI from 'lil-gui';
+import GameOfLife3D from './gol-3d.js';
 
 // Scene:
 const scene = new THREE.Scene();
